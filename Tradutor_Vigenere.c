@@ -7,6 +7,8 @@ typedef struct {
 	int tamanho_da_chave;
 } OBJETO;
 
+char alf[52] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+
 int teste(OBJETO * objeto);
 
 int mostra_resultado(OBJETO * objeto);
@@ -17,7 +19,6 @@ int codifica(OBJETO * objeto);
 
 int decodifica(OBJETO * objeto);
 
-
 int main(void){
 	OBJETO  objeto;
 	OBJETO * ponteiro = &objeto;
@@ -25,20 +26,17 @@ int main(void){
 	char acao,aux;
 	
 	/*
-		-inicializaçao do tamanho da frase 
-		-e do tamanho da chave
+		inicializaçao do tamanho da frase 
+		e do tamanho da chave
 	*/
-
 	objeto.tamanho_da_frase = 0;
 	objeto.tamanho_da_chave = 0;
-
 
 	recebefrase_e_chave(ponteiro);
 
 	/*
-		-acao que sera realizada
+		acao que sera realizada
 	*/
-
 	for(;;){
 		printf("Digite 'c' para codificar ou 'd' para decodificar\n");
 		scanf("%c%c", &acao,&aux);
@@ -55,7 +53,31 @@ int main(void){
 	}
 
 	mostra_resultado(ponteiro);
+}
 
+int recebefrase_e_chave(OBJETO * objeto){
+
+	printf("Digite uma frase:\n>> ");
+	for(int i = 0 ; ; i++){
+		scanf("%c", &objeto->frase[i]);
+		if(objeto->frase[i] == '\n'){
+			objeto->frase[i] = ' ';
+			break;
+		}
+
+		objeto->tamanho_da_frase ++;
+  }
+
+	printf("Digite a palavra chave:\n>> ");
+	for(int i = 0 ; ; i++){
+		scanf("%c", &objeto->palavra_chave[i]);
+		if(objeto->palavra_chave[i] == '\n'){
+			objeto->palavra_chave[i] = ' ';
+			break;
+		}
+
+		objeto->tamanho_da_chave++;
+  }
 }
 
 int teste(OBJETO * objeto){
@@ -79,40 +101,14 @@ int teste(OBJETO * objeto){
 
 int mostra_resultado(OBJETO * objeto){
 	int i;
-	printf("\nEsse e o resultado:\n\n");
+	printf("\nEsse e o resultado: ");
 	for(i = 0 ; i<objeto->tamanho_da_frase ; i++){
 		printf("%c", objeto->frase[i]);
 	}
 	printf("\n");
 }
 
-int recebefrase_e_chave(OBJETO * objeto){
-	int i;
-
-	printf("Digite uma frase:\n");
-	for(i = 0 ; ; i++){
-        scanf("%c", &objeto->frase[i]);
-        if(objeto->frase[i] == '\n'){
-            objeto->frase[i] = ' ';
-            break;
-        }
-		objeto->tamanho_da_frase ++;
-    }
-
-	printf("Digite a palavra chave:\n");
-	for(i = 0 ; ; i++){
-        scanf("%c", &objeto->palavra_chave[i]);
-        if(objeto->palavra_chave[i] == '\n'){
-            objeto->palavra_chave[i] = ' ';
-            break;
-        }
-		objeto->tamanho_da_chave++;
-    }
-
-}
-
 int codifica(OBJETO * objeto){
-	char alf[52] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	int localizador_frase, localizador_chave = 0;
 	int rep_numerica_frase = 0, rep_numerica_chave = 0, rep_numerica_cod;
 
@@ -206,7 +202,6 @@ int codifica(OBJETO * objeto){
 }
 
 int decodifica(OBJETO * objeto){
-	char alf[52] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	int localizador_frase, localizador_chave = 0;
 	int rep_numerica_frase = 0, rep_numerica_chave = 0, rep_numerica_dcod;
 
